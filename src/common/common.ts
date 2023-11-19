@@ -1,6 +1,7 @@
 // import { TelegramTypes } from 'messaging-api-telegram';
 import bot from '../config/telegram';
 import { InputMediaPhoto } from 'messaging-api-telegram/dist/TelegramTypes';
+import { teleSendPostURL } from '../utils/global';
 
 export const checkPassword = (password:string)=>{
   const pass:string = process.env.PASS as string;
@@ -16,6 +17,7 @@ export const teleVideoSend = async(channelId:string, URL: string)=>{
 export const teleMediaSend =async (channelId:string, URL: InputMediaPhoto[]) => {
   // console.log(channelId, URL, '>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>');
   console.log('Inside the tele media send');
-  await bot.sendMediaGroup(channelId,URL);
+  teleSendPostURL.push(URL);
+  // await bot.sendMediaGroup(channelId,URL);
 
 };

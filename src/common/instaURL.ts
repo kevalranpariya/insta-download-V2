@@ -1,5 +1,6 @@
 import axios, { AxiosResponse } from 'axios';
 import { teleMediaSend, teleVideoSend } from './common';
+// import { teleSendPostURL } from '../utils/global';
 
 export const instaAPI = async(username:string, time:string, channelId:string)=>{
   const response:AxiosResponse =
@@ -34,10 +35,10 @@ export const instaAPI = async(username:string, time:string, channelId:string)=>{
           });
         });
         // console.log(carouselPost,'>>>>>>>>>>>>>>>>>>>>>>>>');
-        setTimeout(async ()=>{
-          console.log('inside the set Time Out function');
-          await teleMediaSend(channelId, carouselPost);
-        },5*1000);
+        // setTimeout(async ()=>{
+        console.log('inside the set Time Out function');
+        teleMediaSend(channelId, carouselPost);
+        // },5*1000);
         // postArray.push({
         //   type: 'carousel',
         //   url: carouselPost
@@ -45,6 +46,16 @@ export const instaAPI = async(username:string, time:string, channelId:string)=>{
       }else console.log(post?.image_versions2?.length);
     }
   }
+
+  const maxObject = instaPostData.reduce((max:any, current:any) => (
+    current.device_timestamp > max.device_timestamp
+      ? current
+      : max
+  ));
+
+  return maxObject.device_timestamp;
+
+  // console.log(teleSendPostURL);
 
   //   return await Promise.all(postArray);
 
