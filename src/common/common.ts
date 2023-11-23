@@ -9,8 +9,8 @@ export const checkPassword = (password:string)=>{
   else throw new Error('Password incorrect');
 };
 
-export const teleVideoSend = async(channelId:string, URL: string)=>{
-  await bot.sendVideo(channelId, URL);
+export const teleVideoSend = async(channelId:string, URL: string, caption:string)=>{
+  await bot.sendVideo(channelId, URL,{ caption: caption });
   console.log('Video has sent....................................');
 };
 
