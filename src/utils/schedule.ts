@@ -6,23 +6,32 @@ import bot from '../config/telegram';
 // rule.hour = 0;
 // rule.minute = 54;
 // rule.second = 0;
+
+
 const schedulee = scheduleJob('30 18 * * *',async()=>{
-  insta.map(async(e:any)=>{
-    const maxTimestamp = await instaAPI(e.username, e.time, e.channelId, e.caption);
-    e.time = maxTimestamp;
+  try {
+    insta.map(async(e:any)=>{
+      const maxTimestamp = await instaAPI(e.username, e.time, e.channelId, e.caption);
+      e.time = maxTimestamp;
     // console.log(await Promise.all(instaUrl),'....................................................');
-  });
-  const timeIntnal = setInterval(async()=>{
-    if(!teleSendPostURL?.length){
-      console.log('stop the interval timer');
-      clearInterval(timeIntnal);
-    }else{
-      console.log('Inside the else condition(teleSchedule)');
-      const postURL = teleSendPostURL[teleSendPostURL.length-1];
-      await bot.sendMediaGroup('@nodeinpro', postURL);
-      teleSendPostURL.pop();
-    }
-  },1000*60*15);
+    });
+    const timeIntnal = setInterval(async()=>{
+      if(!teleSendPostURL?.length){
+        console.log('stop the interval timer');
+        clearInterval(timeIntnal);
+      }else{
+        console.log('Inside the else condition(teleSchedule)');
+        const randomPost = Math.floor(Math.random() * teleSendPostURL.length);
+        if(randomPost){
+          const postURL = teleSendPostURL[randomPost];
+          await bot.sendMediaGroup('@nodeinpro', postURL);
+          teleSendPostURL.splice(randomPost, 1);
+        }
+      }
+    },1000*60*15);
+  } catch (err:any) {
+    console.log(err.message);
+  }
 });
 
 // const teleSchedule = scheduleJob('*/1 * * * * *',async()=>{

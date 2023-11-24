@@ -10,14 +10,14 @@ export const checkPassword = (password:string)=>{
 };
 
 export const teleVideoSend = async(channelId:string, URL: string, caption:string)=>{
-  await bot.sendVideo(channelId, URL,{ caption: caption });
-  console.log('Video has sent....................................');
+  try {
+    await bot.sendVideo(channelId, URL,{ caption: caption });
+    console.log('Video has sent....................................');
+  } catch (err:any) {
+    console.log(err.message);
+  }
 };
 
 export const teleMediaSend =async (channelId:string, URL: InputMediaPhoto[]) => {
-  // console.log(channelId, URL, '>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>');
-  console.log('Inside the tele media send');
   teleSendPostURL.push(URL);
-  // await bot.sendMediaGroup(channelId,URL);
-
 };

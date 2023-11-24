@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import { checkPassword } from '../common/common';
-import { insta } from '../utils/global';
+import { insta, teleSendPostURL } from '../utils/global';
 
 export class MainController{
   public instaPost = async(req:Request,res:Response)=>{
@@ -46,5 +46,12 @@ export class MainController{
         message: err.message
       });
     }
+  };
+
+  public post =async (req:Request, res:Response) => {
+    return res.status(200).json({
+      message: 'Operation successfully',
+      data: teleSendPostURL
+    });
   };
 }
