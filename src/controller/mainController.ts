@@ -51,7 +51,8 @@ export class MainController{
   public post =async (req:Request, res:Response) => {
     return res.status(200).json({
       message: 'Operation successfully',
-      data: teleSendPostURL
+      postCount: teleSendPostURL.length,
+      data: teleSendPostURL,
     });
   };
 }
