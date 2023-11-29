@@ -16,7 +16,7 @@ import { instaAPI } from '../common/instaURL';
 //   globalInterval.stop();
 // }, 5000);
 
-const schedulee = scheduleJob('00 18 * * *',async()=>{
+const schedulee = scheduleJob('15 18 * * *',async()=>{
   try {
     globalInterval.stop();
     insta.map(async(e:any)=>{
