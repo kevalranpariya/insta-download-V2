@@ -4,8 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node src/index.ts",
+    "start": "node dist/index.js",
     "dev": "nodemon ./src/index.ts",
+    "build":"tsc",
     "lint:check": "npx eslint ./src/.",
     "lint:fix": "npx eslint ./src/. --fix"
   },

@@ -1,11 +1,11 @@
 import { Request, Response } from 'express';
 import { checkPassword } from '../common/common';
-import { insta } from '../utils/global';
+import { insta, teleSendPostURL } from '../utils/global';
 
 export class MainController{
   public instaPost = async(req:Request,res:Response)=>{
     try {
-      const { password, username, channelId, time } = req.body;
+      const { password, username, channelId, time, caption } = req.body;
       checkPassword(password);
       insta.forEach((e:any)=>{
         if(username == e.username)throw new Error('Username is already exist');
@@ -14,14 +14,16 @@ export class MainController{
       insta.push({
         username,
         channelId,
-        time
+        time,
+        caption
       });
       return res.status(200).json({
         status: 'success',
         data: {
           username,
           channelId,
-          time
+          time,
+          caption
         }
       });
     } catch (err:any) {
@@ -44,5 +46,13 @@ export class MainController{
         message: err.message
       });
     }
+  };
+
+  public post =async (req:Request, res:Response) => {
+    return res.status(200).json({
+      message: 'Operation successfully',
+      postCount: teleSendPostURL.length,
+      data: teleSendPostURL,
+    });
   };
 }
