@@ -17,7 +17,7 @@ import bot from '../config/telegram';
 //   globalInterval.stop();
 // }, 5000);
 
-const schedulee = scheduleJob('40 17 * * *',async()=>{
+const schedulee = scheduleJob('25 17 * * *',async()=>{
   try {
     globalInterval.stop();
     insta.map(async(e:any)=>{
