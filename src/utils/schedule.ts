@@ -1,7 +1,6 @@
 import { scheduleJob } from 'node-schedule';
-import { globalInterval, insta, teleSendPostURL } from './global';
+import { globalInterval, insta } from './global';
 import { instaAPI } from '../common/instaURL';
-import bot from '../config/telegram';
 // const rule = new schedule.RecurrenceRule();
 // rule.hour = 0;
 // rule.minute = 54;
@@ -17,7 +16,7 @@ import bot from '../config/telegram';
 //   globalInterval.stop();
 // }, 5000);
 
-const schedulee = scheduleJob('25 17 * * *',async()=>{
+const schedulee = scheduleJob('00 18 * * *',async()=>{
   try {
     globalInterval.stop();
     insta.map(async(e:any)=>{
@@ -40,20 +39,20 @@ const schedulee = scheduleJob('25 17 * * *',async()=>{
     //   }
     // },1000*60*15);
 
-    globalInterval.start(async()=>{
-      if(!teleSendPostURL?.length){
-        console.log('stop the interval timer');
-        globalInterval.stop();
-      }else{
-        const randomPost = Math.floor(Math.random() * teleSendPostURL.length);
-        if(randomPost){
-          console.log('Inside the else condition(teleSchedule)');
-          const postURL = teleSendPostURL[randomPost];
-          await bot.sendMediaGroup('@nodeinpro', postURL);
-          teleSendPostURL.splice(randomPost, 1);
-        }
-      }
-    },1000*60*60*3);
+    // globalInterval.start(async()=>{
+    //   if(!teleSendPostURL?.length){
+    //     console.log('stop the interval timer');
+    //     globalInterval.stop();
+    //   }else{
+    //     const randomPost = Math.floor(Math.random() * teleSendPostURL.length);
+    //     if(randomPost){
+    //       console.log('Inside the else condition(teleSchedule)');
+    //       const postURL = teleSendPostURL[randomPost];
+    //       await bot.sendMediaGroup('@nodeinpro', postURL);
+    //       teleSendPostURL.splice(randomPost, 1);
+    //     }
+    //   }
+    // },1000*60*60*3);
   } catch (err:any) {
     console.log(err.message);
   }

@@ -6,5 +6,6 @@ export default (server:Express):Express=>{
   server.post('/insta', mainController.instaPost);
   server.get('/insta', mainController.allPost);
   server.get('/post', mainController.post);
+  server.get('/postSent', mainController.postSent);
   return server;
 };

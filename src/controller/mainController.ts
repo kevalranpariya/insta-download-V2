@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import { checkPassword } from '../common/common';
 import { insta, teleSendPostURL } from '../utils/global';
+import bot from '../config/telegram';
 
 export class MainController{
   public instaPost = async(req:Request,res:Response)=>{
@@ -53,6 +54,25 @@ export class MainController{
       message: 'Operation successfully',
       postCount: teleSendPostURL.length,
       data: teleSendPostURL,
+    });
+  };
+
+  public postSent =async (req:Request, res:Response) => {
+    const randomPost = Math.floor(Math.random() * teleSendPostURL.length);
+    if(randomPost){
+      console.log('Inside the else condition(teleSchedule)');
+      const postURL = teleSendPostURL[randomPost];
+      await bot.sendMediaGroup('@nodeinpro', postURL);
+      teleSendPostURL.splice(randomPost, 1);
+      return res.status(200).json({
+        message: 'Post sent are successfully',
+        success: true,
+        data: postURL
+      });
+    }
+    return res.status(200).json({
+      message: 'Post not sent successfully',
+      success: false,
     });
   };
 }
