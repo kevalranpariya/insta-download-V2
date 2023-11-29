@@ -17,7 +17,7 @@ import bot from '../config/telegram';
 //   globalInterval.stop();
 // }, 5000);
 
-const schedulee = scheduleJob('15 17 * * *',async()=>{
+const schedulee = scheduleJob('30 17 * * *',async()=>{
   try {
     globalInterval.stop();
     insta.map(async(e:any)=>{
@@ -53,7 +53,7 @@ const schedulee = scheduleJob('15 17 * * *',async()=>{
           teleSendPostURL.splice(randomPost, 1);
         }
       }
-    },1000*60*60);
+    },1000*60*60*3);
   } catch (err:any) {
     console.log(err.message);
   }
